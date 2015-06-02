@@ -1,4 +1,8 @@
-$("#controls").change(0, updateBD);
+function attach()
+{
+	$("#controls").change(0, updateBD);
+	updateBD(0);
+}
 
 function updateBD(event)
 {
@@ -17,19 +21,19 @@ function updateBD(event)
 					name = node.firstChild.nodeValue;
 					break;
 				case "affinity":
-					affinity = node.firstChild.nodeValue;
+					affinity = parseFloat(node.firstChild.nodeValue);
 					break;
 				case "Eg":
-					Eg = node.firstChild.nodeValue;
+					Eg = parseFloat(node.firstChild.nodeValue);
 					break;
 				case "Ni":
-					ni = node.firstChild.nodeValue;
+					ni = parseFloat(node.firstChild.nodeValue);
 					break;
 				case "Nc":
-					nc = node.firstChild.nodeValue;
+					nc = parseFloat(node.firstChild.nodeValue);
 					break;
 				case "Nv":
-					nv = node.firstChild.nodeValue;
+					nv = parseFloat(node.firstChild.nodeValue);
 					break;
 				default:
 					console.log("Unknown XML tag: " + node.nodeName)
@@ -38,8 +42,29 @@ function updateBD(event)
 		}
 	}
 
-	var n1 = 1.5e10*1.5e10/5e13;
-	var n2 = 2e13;
+	var n1 = parseFloat($("#conc1").val());
+	var n2 = parseFloat($("#conc2").val());
+
+	if(isNaN(n1))
+	{
+		n1 = 1E18;
+		console.log("NaN reached");
+	}
+	if(isNaN(n2))
+	{
+		n2 = 1E17;
+		console.log("NaN reached");
+	}
+
+	n1 += ni;
+	n2 += ni;
+
+	if($("input[name=type1]:checked").val() === "p")
+		n1 = ni*ni/n1;
+	if($("input[name=type2]:checked").val() === "p")
+		n2 = ni*ni/n2;
+
+	
 
 	function calcEnergy(doping, nc) {
 		var boltzman = 8.61733E-5;
@@ -101,4 +126,6 @@ function updateBD(event)
 	drawLine(250+x1-(1-sidefactor)*poshelper, 300-Ef1*eVtopx, 250+x1,300-Ef1*eVtopx+V1);
 	drawLine(250+x1,300-Ef1*eVtopx+V1,250+x1+(sidefactor)*poshelper,300-Ef1*eVtopx+V1+V2);
 	drawLine(250+x1+(sidefactor)*poshelper,300-Ef1*eVtopx+V1+V2, 250+x1+x2,300-Ef1*eVtopx+V1+V2);
+
+	drawCanvas();
 }

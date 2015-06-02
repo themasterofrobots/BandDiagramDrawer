@@ -4,11 +4,11 @@
 <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <script src="xmlutil.js"></script>
-<script src="drawing.js"></script>
 <script src="canvas.js"></script>
+<script src="drawing.js"></script>
 <link rel="stylesheet" type="text/css" href="style.css">
 </head>
-<body onload="updateBD(0)">
+<body onload="attach()">
 <section>
 <main>
 <svg xmlns="http://www.w3.org/2000/svg" id="banddiagram" width="700" height="600">
@@ -24,10 +24,10 @@
 <aside>
 Hi there!
 <form id="controls">
-Doping type (1): <input type="radio" name="type1" value "n">n <input type="radio" name="type1" value "p" checked="true">p <br />
-Doping concentration (1): <input type="text" value="2E17"> <br />
-Doping type (2): <input type="radio" name="type2" value "n" checked="true">n <input type="radio" name="type2" value "p">p <br />
-Doping concentration (2): <input type="text" value="1E18"> <br />
+Doping type (1): <input type="radio" name="type1" value="n">n <input type="radio" name="type1" value="p" checked="true">p <br />
+Doping concentration (1): <input id="conc1" type="text" value="2E17"> <br />
+Doping type (2): <input type="radio" name="type2" value="n" checked="true">n <input type="radio" name="type2" value="p">p <br />
+Doping concentration (2): <input id="conc2" type="text" value="1E18"> <br />
 <br>
 </form>
 </aside>
