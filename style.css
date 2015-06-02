@@ -1,0 +1,14 @@
+section {
+	width:1000px;
+	margin:10px;
+}
+
+main {
+	float:left;
+	width:700px;
+}
+
+aside {
+	float:left;
+	width:200px;
+}

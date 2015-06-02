@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script src="xmlutil.js"></script>
+<script src="drawing.js"></script>
+<script src="canvas.js"></script>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body onload="updateBD(0)">
+<section>
+<main>
+<svg xmlns="http://www.w3.org/2000/svg" id="banddiagram" width="700" height="600">
+ 	<path id="Ec" stroke="blue" stroke-width="4" fill="none"></path>
+	<path id="Ei" stroke="blue" stroke-width="4" fill="none" stroke-dasharray="5,5"></path>
+	<path id="Ev" stroke="blue" stroke-width="4" fill="none"></path>
+	<line id="Ef" x1="50" x2="650" y1="300" y2="300" stroke="green" stroke-width="3" fill="none" stroke-dasharray="10,4"></line>
+	<line id="x1" x1="250" x2="250" y1="0" y2="600" stroke="black" stroke-width="2" fill="none" stroke-dasharray="4,10"></line>
+	<line id="x2" x1="450" x2="450" y1="0" y2="600" stroke="black" stroke-width="2" fill="none" stroke-dasharray="4,10"></line>
+	<line id="junction" x1="350" x2="350" y1="0" y2="600" stroke="black" stroke-width="2" fill="none" stroke-dasharray="4,10"></line>
+</svg>
+</main>
+<aside>
+Hi there!
+<form id="controls">
+Doping type (1): <input type="radio" name="type1" value "n">n <input type="radio" name="type1" value "p" checked="true">p <br />
+Doping concentration (1): <input type="text" value="2E17"> <br />
+Doping type (2): <input type="radio" name="type2" value "n" checked="true">n <input type="radio" name="type2" value "p">p <br />
+Doping concentration (2): <input type="text" value="1E18"> <br />
+<br>
+</form>
+</aside>
+</section>
+
+<canvas id="canvas" width="800" height="600">
+</canvas>
+
+</body>
+</html>

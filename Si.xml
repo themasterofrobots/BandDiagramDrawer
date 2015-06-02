@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<material>
+	<name>Si</name>
+	<affinity>4.05</affinity>
+	<Eg>1.12</Eg>
+	<Ni>1.5E10</Ni>
+	<Nc>3.2E19</Nc>
+	<Nv>1.8E19</Nv>
+	<dielectric>11.7</dielectric>
+	<effemass>1.09</effemass>
+	<effhmass>1.15</effhmass>
+</material>
