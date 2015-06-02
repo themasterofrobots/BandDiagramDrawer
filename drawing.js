@@ -1,14 +1,16 @@
-function attach()
+var name, affinity, Eg, ni, nc, nv, dielectric;
+var n1 = 2E17, n2 = 1E18;
+
+function initialize()
 {
+	loadMaterial("Si.xml");
 	$("#controls").change(0, updateBD);
 	updateBD(0);
 }
 
-function updateBD(event)
+function loadMaterial(filename)
 {
-	var name, affinity, Eg, ni, nc, nv, dielectric;
-
-	var xml = loadXMLDoc("Si.xml");
+	var xml = loadXMLDoc(filename);
 	var mats = xml.getElementsByTagName("material");
 	for (i = 0; i < mats.length; i++)
 	{
@@ -41,49 +43,63 @@ function updateBD(event)
 			}
 		}
 	}
+}
 
-	var n1 = parseFloat($("#conc1").val());
-	var n2 = parseFloat($("#conc2").val());
+function updateDoping(origdopingvar, textid, radioname)
+{
+	var temp = parseFloat($(textid).val());
 
-	if(isNaN(n1))
+	if(isNaN(temp))
 	{
-		n1 = 1E18;
-		console.log("NaN reached");
-	}
-	if(isNaN(n2))
-	{
-		n2 = 1E17;
-		console.log("NaN reached");
+		return origdopingvar;
 	}
 
-	n1 += ni;
-	n2 += ni;
+	temp += ni;
 
-	if($("input[name=type1]:checked").val() === "p")
-		n1 = ni*ni/n1;
-	if($("input[name=type2]:checked").val() === "p")
-		n2 = ni*ni/n2;
+	if($("input[name=" + radioname + "]:checked").val() === "p")
+		temp = ni*ni/temp;
 
-	
+	return temp;
+}
 
-	function calcEnergy(doping, nc) {
-		var boltzman = 8.61733E-5;
-		var temp = 300;
-		//this returns the magnitude, sign is positive
-		return boltzman*temp*Math.log(nc/doping);
-	}
+function calcEnergy(doping, nc) {
+	var boltzman = 8.61733E-5;
+	var temp = 300;
+	//this returns the magnitude, sign is positive
+	return boltzman*temp*Math.log(nc/doping);
+}
+
+function drawPoint(x, y){
+	$("#banddiagram").append($('<circle>').attr({cx: x, cy: y, r: 2, fill:"red"}));
+}
+
+function drawLine(x1, y1, x2, y2){
+	var line = document.createElement("line");
+	line.setAttribute("x1", x1);
+	line.setAttribute("y1", y1);
+	line.setAttribute("x2", x2);
+	line.setAttribute("y2", y2);
+	line.setAttribute("stroke", "red");
+	document.getElementById("banddiagram").appendChild(line);
+}
+
+function updateBD(event)
+{
+	n1 = updateDoping(n1, "#conc1", "type1");
+	n2 = updateDoping(n2, "#conc2", "type2");
 
 	var Ef1 = calcEnergy(n1, nc);
 	var Ef2 = calcEnergy(n2, nc);
 
 	var Vbi = Ef1 - Ef2;
 
-
 	var eVtopx = 200;
 	var line = " h200";
 	var ecstart = "M50," + (300-Ef1*eVtopx);
 	var eistart = "M50," + (300-(Ef1-Eg/2)*eVtopx);
 	var evstart = "M50," + (300-(Ef1-Eg)*eVtopx);
+
+	//change this for the side factor calculation
 	if(n1 < ni)
 		n1 = ni*ni/n1;
 	if(n2 < ni)
@@ -100,21 +116,6 @@ function updateBD(event)
 	$("#Ei").attr("d", eistart + line + contactpotential + line);
 	$("#Ev").attr("d", evstart + line + contactpotential + line);
 	$("#junction").attr({x1: 250+x1, x2: 250+x1});
-
-
-	function drawPoint(x, y){
-		$("#banddiagram").append($('<circle>').attr({cx: x, cy: y, r: 2, fill:"red"}));
-	}
-
-	function drawLine(x1, y1, x2, y2){
-		var line = document.createElement("line");
-		line.setAttribute("x1", x1);
-		line.setAttribute("y1", y1);
-		line.setAttribute("x2", x2);
-		line.setAttribute("y2", y2);
-		line.setAttribute("stroke", "red");
-		document.getElementById("banddiagram").appendChild(line);
-	}
 
 	drawPoint(250,300-Ef1*eVtopx);
 	drawPoint(250+x1-(1-sidefactor)*poshelper,300-Ef1*eVtopx);
