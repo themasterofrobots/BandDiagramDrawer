@@ -62,10 +62,14 @@
 	</widths>
 	<styles>
 		<!-- we replace underscores with spaces in the display -->
-		<Solid/>
-		<Dotted>1,1</Dotted>
-		<Short_dash>2,1</Short_dash>
-		<Long_dash>4,1</Long_dash>
-		<Dot-dash>4,1,1,1</Dot-dash>
+		<Solid>0</Solid>
+		<Dot1>1</Dot1>
+		<Dot2>1,2</Dot2>
+		<Short_dash1>2,1</Short_dash1>
+		<Short_dash2>2,3</Short_dash2>
+		<Medium_dash>4,2</Medium_dash>
+		<Long_dash>8,3</Long_dash>
+		<Dot-dash>8,2,1,2</Dot-dash>
+		<Dot-dot-dash>4,1,1,1,1,1</Dot-dot-dash>
 	</styles>
 </configoptions>

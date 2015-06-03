@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
-<script src="//code.jquery.com/jquery-1.11.3.js"></script>
-<script src="//code.jquery.com/jquery-migrate-1.2.1.js"></script>
+<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 <script src="xmlutil.js"></script>
 <script src="download.js"></script>
 <script src="canvas.js"></script>
@@ -12,14 +11,15 @@
 <body>
 <section>
 <main>
+<!-- Careful, styling in here must exactly match that of bdlines.xml -->
 <svg xmlns="http://www.w3.org/2000/svg" id="banddiagram" width="700" height="600">
- 	<path id="Ec" stroke="blue" stroke-width="4" fill="none"></path>
-	<path id="Ei" stroke="blue" stroke-width="4" fill="none" stroke-dasharray="5,5"></path>
-	<path id="Ev" stroke="blue" stroke-width="4" fill="none"></path>
-	<line id="Ef" x1="50" x2="650" y1="300" y2="300" stroke="green" stroke-width="3" fill="none" stroke-dasharray="10,4"></line>
-	<line id="x1" x1="250" x2="250" y1="0" y2="600" stroke="black" stroke-width="2" fill="none" stroke-dasharray="4,10"></line>
-	<line id="x2" x1="450" x2="450" y1="0" y2="600" stroke="black" stroke-width="2" fill="none" stroke-dasharray="4,10"></line>
-	<line id="junction" x1="350" x2="350" y1="0" y2="600" stroke="black" stroke-width="2" fill="none" stroke-dasharray="4,10"></line>
+ 	<path id="Ec" stroke="Blue" stroke-width="4.0" fill="none" stroke-dasharray-helper="0"></path>
+	<path id="Ei" stroke="Blue" stroke-width="4.0" fill="none" stroke-dasharray-helper="1" stroke-dasharray="4"></path>
+	<path id="Ev" stroke="Blue" stroke-width="4.0" fill="none" stroke-dasharray-helper="0"></path>
+	<line id="Ef" x1="50" x2="650" y1="300" y2="300" stroke="Green" stroke-width="3.0" fill="none" stroke-dasharray-helper="4,2" stroke-dasharray="16,8"></line>
+	<line id="x1" x1="250" x2="250" y1="0" y2="600" stroke="Black" stroke-width="2.0" fill="none" stroke-dasharray-helper="2,3" stroke-dasharray="8,12"></line>
+	<line id="x2" x1="450" x2="450" y1="0" y2="600" stroke="Black" stroke-width="2.0" fill="none" stroke-dasharray-helper="2,3" stroke-dasharray="8,12"></line>
+	<line id="junction" x1="350" x2="350" y1="0" y2="600" stroke="Black" stroke-width="2.0" fill="none" stroke-dasharray-helper="2,3" stroke-dasharray="6,9"></line>
 </svg>
 </main>
 <aside>
@@ -36,11 +36,14 @@ Doping concentration (2): <input id="conc2" class="conctext" type="text" value="
 <br />
 <form id="bdstyle">
 <div id="selectenergy" class="energyeditor">
-Energy level: <select>
-	<option value="Ec">Ec</option>
+Energy level: <select id="selectedline">
+	<option value="Ec" selected="selected">Ec</option>	
 	<option value="Ei">Ei</option>
 	<option value="Ev">Ev</option>
 	<option value="Ef">Ef</option>
+	<option value="x1">x1</option>
+	<option value="x2">x2</option>
+	<option value="junction">Junc</option>
 </select></div>
 <div class="energyeditor">
 Drawn: <input type="checkbox" id="lineactive" checked><br/>

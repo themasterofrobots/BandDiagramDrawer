@@ -1,3 +1,4 @@
+
 function loadXMLDoc(filename)
 {
 	if (window.XMLHttpRequest)

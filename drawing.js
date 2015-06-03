@@ -2,8 +2,8 @@ var material = {};
 var n1 = 2E17, n2 = 1E18;
 
 $(document).ready(function(){
-	parseBDLines();
 	parseXML("Si.xml", material);
+	parseBDLines();
 });
 
 function updateDoping(origdopingvar, textid, radioname)
@@ -31,11 +31,11 @@ function calcEnergy(doping, nc) {
 }
 
 function drawPoint(x, y){
-	$("#banddiagram").append($('<circle>').attr({cx: x, cy: y, r: 2, fill: "red"}));
+	$("#banddiagram").append($('<circle>').attr({cx: x, cy: y, r: 2, fill: "red", class:"diagnostic"}));
 }
 
 function drawLine(x1, y1, x2, y2){
-	$("#banddiagram").append($('<line>').attr({x1: x1, y1: y1, x2: x2, y2: y2, stroke: "red"}));
+	$("#banddiagram").append($('<line>').attr({x1: x1, y1: y1, x2: x2, y2: y2, stroke: "red", class:"diagnostic"}));
 }
 
 function updateBD()
@@ -65,12 +65,14 @@ function updateBD()
 	var V1 = Vbi*(1-sidefactor)*eVtopx;
 	var V2 = Vbi*sidefactor*eVtopx;
 	var poshelper = Math.min(x1, x2);
-	var contactpotential = "q" + (x1-(1-sidefactor)*poshelper) + "," + 0 + " " + x1 + "," + V1 + " q" + (sidefactor)*poshelper + "," + V2 + " " + x2 + "," + V2;
+	var contactpotential = " q" + (x1-(1-sidefactor)*poshelper) + "," + 0 + " " + x1 + "," + V1 + " q" + (sidefactor)*poshelper + "," + V2 + " " + x2 + "," + V2;
 
 	$("#Ec").attr("d", ecstart + line + contactpotential + line);
 	$("#Ei").attr("d", eistart + line + contactpotential + line);
 	$("#Ev").attr("d", evstart + line + contactpotential + line);
 	$("#junction").attr({x1: 250+x1, x2: 250+x1});
+
+	$(".diagnostic").remove();
 
 	drawPoint(250,300-Ef1*eVtopx);
 	drawPoint(250+x1-(1-sidefactor)*poshelper,300-Ef1*eVtopx);
@@ -86,22 +88,36 @@ function updateBD()
 	drawCanvas();
 }
 
+function getSelectedLine(){
+	return $("#" + $("#selectedline option:selected").val());
+}
+
+function updateStyleControls(){
+	var $line = getSelectedLine();
+	$("#lineactive").prop("checked", ($line.attr("visibility") !== "hidden"));
+	console.log($line.attr("stroke"));
+	console.log($line.attr("stroke-width"));
+	$("#linecolor").val($line.attr("stroke"));
+	$("#linewidth").val($line.attr("stroke-width"));
+	$("#linestyle").val($line.attr("stroke-dasharray-helper"));
+}
+
 function changeLineDrawn(){
-	$("#Ec").toggleAttr("visibility", "hidden");
+	getSelectedLine().toggleAttr("visibility", "hidden");
 }
 
 function changeLineColor(){
-	$("#Ec").attr("stroke", $("#linecolor option:selected").text());
+	getSelectedLine().attr("stroke", $("#linecolor option:selected").val());
 }
 
 function changeLineWidth(){
-	$("#Ec").attr("stroke-width", $("#linewidth option:selected").text());
-	lineStyleHelper($("#Ec"));
+	getSelectedLine().attr("stroke-width", $("#linewidth option:selected").val());
+	lineStyleHelper(getSelectedLine());
 }
 
 function changeLineStyle(){
-	$("#Ec").attr("stroke-dasharray-helper", $("#linestyle option:selected").attr("value"));
-	lineStyleHelper($("#Ec"));
+	getSelectedLine().attr("stroke-dasharray-helper", $("#linestyle option:selected").attr("value"));
+	lineStyleHelper(getSelectedLine());
 }
 
 function lineStyleHelper($line){
@@ -110,6 +126,8 @@ function lineStyleHelper($line){
 	var dasharray = $line.attr("stroke-dasharray-helper").split(",");
 	$.each(dasharray, function(index, value){
 		dasharray[index] = thickness*parseFloat(value);
+		if(dasharray[index] === 0.0) 
+			dasharray[index] = "none";
 	});
 	$line.attr("stroke-dasharray", dasharray.join());
 }
@@ -127,10 +145,12 @@ $.fn.toggleAttr = function(attribute, value){
 
 function bindEvtHandlers(){
 	$(".dopingtype").change(updateBD);
-	$(".conctext").keydown(updateBD);
+	$(".conctext").keyup(updateBD);
+	$("#selectedline").change(updateStyleControls);
 	$("#lineactive").click(changeLineDrawn);
 	$("#linecolor").change(changeLineColor);
 	$("#linewidth").change(changeLineWidth);
 	$("#linestyle").change(changeLineStyle);
+	updateStyleControls();
 	updateBD();
 }
