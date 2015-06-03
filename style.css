@@ -10,5 +10,26 @@ main {
 
 aside {
 	float:left;
-	width:200px;
+	width:220px;
+	border:2px;
+	border-style:solid;
+	border-color:black;
+	padding:5px;
+}
+
+#bdstyle {
+	border:2px;
+	border-style:solid;
+	border-color:black;
+}
+
+#selectenergy {
+	border-bottom: 2px;
+	border-bottom-style: solid;
+	border-bottom-color: black;
+	padding:5px;
+}
+
+.energyeditor {
+	padding:5px;
 }

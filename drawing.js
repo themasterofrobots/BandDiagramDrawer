@@ -1,49 +1,10 @@
-var name, affinity, Eg, ni, nc, nv, dielectric;
+var material = {};
 var n1 = 2E17, n2 = 1E18;
 
-function initialize()
-{
-	loadMaterial("Si.xml");
-	$("#controls").change(0, updateBD);
-	updateBD(0);
-}
-
-function loadMaterial(filename)
-{
-	var xml = loadXMLDoc(filename);
-	var mats = xml.getElementsByTagName("material");
-	for (i = 0; i < mats.length; i++)
-	{
-		var mat = mats[i];
-		for (j = 0; j < mat.children.length; j++)
-		{
-			var node = mat.children[j];
-			switch(node.nodeName) {
-				case "name":
-					name = node.firstChild.nodeValue;
-					break;
-				case "affinity":
-					affinity = parseFloat(node.firstChild.nodeValue);
-					break;
-				case "Eg":
-					Eg = parseFloat(node.firstChild.nodeValue);
-					break;
-				case "Ni":
-					ni = parseFloat(node.firstChild.nodeValue);
-					break;
-				case "Nc":
-					nc = parseFloat(node.firstChild.nodeValue);
-					break;
-				case "Nv":
-					nv = parseFloat(node.firstChild.nodeValue);
-					break;
-				default:
-					console.log("Unknown XML tag: " + node.nodeName)
-					break;
-			}
-		}
-	}
-}
+$(document).ready(function(){
+	parseBDLines();
+	parseXML("Si.xml", material);
+});
 
 function updateDoping(origdopingvar, textid, radioname)
 {
@@ -54,10 +15,10 @@ function updateDoping(origdopingvar, textid, radioname)
 		return origdopingvar;
 	}
 
-	temp += ni;
+	temp += material.ni;
 
 	if($("input[name=" + radioname + "]:checked").val() === "p")
-		temp = ni*ni/temp;
+		temp = material.ni*material.ni/temp;
 
 	return temp;
 }
@@ -70,40 +31,34 @@ function calcEnergy(doping, nc) {
 }
 
 function drawPoint(x, y){
-	$("#banddiagram").append($('<circle>').attr({cx: x, cy: y, r: 2, fill:"red"}));
+	$("#banddiagram").append($('<circle>').attr({cx: x, cy: y, r: 2, fill: "red"}));
 }
 
 function drawLine(x1, y1, x2, y2){
-	var line = document.createElement("line");
-	line.setAttribute("x1", x1);
-	line.setAttribute("y1", y1);
-	line.setAttribute("x2", x2);
-	line.setAttribute("y2", y2);
-	line.setAttribute("stroke", "red");
-	document.getElementById("banddiagram").appendChild(line);
+	$("#banddiagram").append($('<line>').attr({x1: x1, y1: y1, x2: x2, y2: y2, stroke: "red"}));
 }
 
-function updateBD(event)
+function updateBD()
 {
 	n1 = updateDoping(n1, "#conc1", "type1");
 	n2 = updateDoping(n2, "#conc2", "type2");
 
-	var Ef1 = calcEnergy(n1, nc);
-	var Ef2 = calcEnergy(n2, nc);
+	var Ef1 = calcEnergy(n1, material.Nc);
+	var Ef2 = calcEnergy(n2, material.Nc);
 
 	var Vbi = Ef1 - Ef2;
 
 	var eVtopx = 200;
 	var line = " h200";
 	var ecstart = "M50," + (300-Ef1*eVtopx);
-	var eistart = "M50," + (300-(Ef1-Eg/2)*eVtopx);
-	var evstart = "M50," + (300-(Ef1-Eg)*eVtopx);
+	var eistart = "M50," + (300-(Ef1-material.Eg/2)*eVtopx);
+	var evstart = "M50," + (300-(Ef1-material.Eg)*eVtopx);
 
 	//change this for the side factor calculation
-	if(n1 < ni)
-		n1 = ni*ni/n1;
-	if(n2 < ni)
-		n2 = ni*ni/n2;
+	if(n1 < material.ni)
+		n1 = material.ni*material.ni/n1;
+	if(n2 < material.ni)
+		n2 = material.ni*material.ni/n2;
 	var sidefactor = n1/(n1+n2);
 	var x1 = 200*(1-sidefactor);
 	var x2 = 200*sidefactor;
@@ -129,4 +84,53 @@ function updateBD(event)
 	drawLine(250+x1+(sidefactor)*poshelper,300-Ef1*eVtopx+V1+V2, 250+x1+x2,300-Ef1*eVtopx+V1+V2);
 
 	drawCanvas();
+}
+
+function changeLineDrawn(){
+	$("#Ec").toggleAttr("visibility", "hidden");
+}
+
+function changeLineColor(){
+	$("#Ec").attr("stroke", $("#linecolor option:selected").text());
+}
+
+function changeLineWidth(){
+	$("#Ec").attr("stroke-width", $("#linewidth option:selected").text());
+	lineStyleHelper($("#Ec"));
+}
+
+function changeLineStyle(){
+	$("#Ec").attr("stroke-dasharray-helper", $("#linestyle option:selected").attr("value"));
+	lineStyleHelper($("#Ec"));
+}
+
+function lineStyleHelper($line){
+	var thickness = parseFloat($line.attr("stroke-width"));
+	if(thickness < 3.5) thickness += 1.0;
+	var dasharray = $line.attr("stroke-dasharray-helper").split(",");
+	$.each(dasharray, function(index, value){
+		dasharray[index] = thickness*parseFloat(value);
+	});
+	$line.attr("stroke-dasharray", dasharray.join());
+}
+
+$.fn.toggleAttr = function(attribute, value){
+	if ($(this).attr(attribute) === value)
+	{
+		$(this).removeAttr(attribute);
+	}
+	else
+	{
+		$(this).attr(attribute, value);
+	}
+}
+
+function bindEvtHandlers(){
+	$(".dopingtype").change(updateBD);
+	$(".conctext").keydown(updateBD);
+	$("#lineactive").click(changeLineDrawn);
+	$("#linecolor").change(changeLineColor);
+	$("#linewidth").change(changeLineWidth);
+	$("#linestyle").change(changeLineStyle);
+	updateBD();
 }

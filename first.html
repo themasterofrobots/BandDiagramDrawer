@@ -1,14 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-US">
 <head>
-<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.3.js"></script>
+<script src="//code.jquery.com/jquery-migrate-1.2.1.js"></script>
 <script src="xmlutil.js"></script>
+<script src="download.js"></script>
 <script src="canvas.js"></script>
 <script src="drawing.js"></script>
 <link rel="stylesheet" type="text/css" href="style.css">
 </head>
-<body onload="initialize()">
+<body>
 <section>
 <main>
 <svg xmlns="http://www.w3.org/2000/svg" id="banddiagram" width="700" height="600">
@@ -22,18 +23,43 @@
 </svg>
 </main>
 <aside>
-Hi there!
 <form id="controls">
-Doping type (1): <input type="radio" name="type1" value="n">n <input type="radio" name="type1" value="p" checked="true">p <br />
-Doping concentration (1): <input id="conc1" type="text" value="2E17"> <br />
-Doping type (2): <input type="radio" name="type2" value="n" checked="true">n <input type="radio" name="type2" value="p">p <br />
-Doping concentration (2): <input id="conc2" type="text" value="1E18"> <br />
-<br>
+Doping type (1): 
+<input type="radio" class="dopingtype" name="type1" value="n"> n 
+<input type="radio" class="dopingtype" name="type1" value="p" checked="true">p <br />
+Doping concentration (1): <input id="conc1" class="conctext" type="text" value="2E17"> <br />
+Doping type (2): 
+<input type="radio" class="dopingtype" name="type2" value="n" checked="true">n 
+<input type="radio" class="dopingtype" name="type2" value="p">p <br />
+Doping concentration (2): <input id="conc2" class="conctext" type="text" value="1E18"> <br />
+</form>
+<br />
+<form id="bdstyle">
+<div id="selectenergy" class="energyeditor">
+Energy level: <select>
+	<option value="Ec">Ec</option>
+	<option value="Ei">Ei</option>
+	<option value="Ev">Ev</option>
+	<option value="Ef">Ef</option>
+</select></div>
+<div class="energyeditor">
+Drawn: <input type="checkbox" id="lineactive" checked><br/>
+Line Color: <select id="linecolor">
+
+</select><br />
+Line Width: <select id="linewidth">
+
+</select><br />
+Line Style: <select id="linestyle">
+
+</select><br/>
+
+</div>
 </form>
 </aside>
 </section>
 
-<canvas id="canvas" width="800" height="600">
+<canvas id="canvas" width="800" height="600" href="hello.png">
 </canvas>
 
 </body>

@@ -3,7 +3,7 @@
 	<name>Si</name>
 	<affinity>4.05</affinity>
 	<Eg>1.12</Eg>
-	<Ni>1.5E10</Ni>
+	<ni>1.5E10</ni>
 	<Nc>3.2E19</Nc>
 	<Nv>1.8E19</Nv>
 	<dielectric>11.7</dielectric>
