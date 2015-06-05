@@ -45,7 +45,7 @@ function drawCanvas()
 	//download();
 }
 
-function download()
+function downloadCanvas()
 {
 	var canvas = document.getElementById("canvas");
 	var url2 = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");

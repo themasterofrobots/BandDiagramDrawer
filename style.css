@@ -1,11 +1,11 @@
-section {
-	width:1000px;
-	margin:10px;
+body {
+	background-color:#DDD;
 }
 
 main {
 	float:left;
 	width:700px;
+	background-color:#FFF;
 }
 
 aside {
@@ -15,6 +15,7 @@ aside {
 	border-style:solid;
 	border-color:black;
 	padding:5px;
+	background-color:#FFF;
 }
 
 #bdstyle {
@@ -27,7 +28,7 @@ aside {
 	border-bottom: 2px;
 	border-bottom-style: solid;
 	border-bottom-color: black;
-	padding:5px;
+
 }
 
 .energyeditor {

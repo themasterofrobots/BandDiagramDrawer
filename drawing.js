@@ -151,6 +151,7 @@ function bindEvtHandlers(){
 	$("#linecolor").change(changeLineColor);
 	$("#linewidth").change(changeLineWidth);
 	$("#linestyle").change(changeLineStyle);
+	$("#downloadPNG").click(downloadCanvas);
 	updateStyleControls();
 	updateBD();
 }

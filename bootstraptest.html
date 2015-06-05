@@ -19,7 +19,7 @@
 </head>
 <div class="container">
 <div class="row">
-<main class="col-md-9">
+<main class="col-lg-8">
 <!-- Careful, styling in here must exactly match that of bdlines.xml -->
 <svg xmlns="http://www.w3.org/2000/svg" id="banddiagram" width="700" height="600">
  	<path id="Ec" stroke="Blue" stroke-width="4.0" fill="none" stroke-dasharray-helper="0"></path>
@@ -31,22 +31,41 @@
 	<line id="junction" x1="350" x2="350" y1="0" y2="600" stroke="Black" stroke-width="2.0" fill="none" stroke-dasharray-helper="2,3" stroke-dasharray="6,9"></line>
 </svg>
 </main>
-<aside class="col-md-3">
-<form class="form-group" id="controls">
-<label>Doping type (1):</label> 
-<input type="radio" class="dopingtype" name="type1" value="n"> n 
-<input type="radio" class="dopingtype" name="type1" value="p" checked="true">p <br />
+
+<aside class="col-lg-4">
+<form id="controls">
+
+<label class="control-label">Doping type (1): </label>
+<div class="btn-group" data-toggle="buttons">
+<label class="btn btn-primary btn-sm"><input type="radio" class="dopingtype" name="type1" autocomplete="off" value="n"> n </label>
+<label class="btn btn-primary btn-sm active"><input type="radio" class="dopingtype" name="type1" autocomplete="off" value="p" checked="true">p </label>
+</div>
+
+<div class="form-group">
 <label for="conc1"> Doping concentration (1):</label>
-<input id="conc1" class="conctext form-control" type="text" value="2E17"> <br />
+<input id="conc1" class="conctext form-control" type="text" value="2E17">
+</div>
 
-<label>Doping type (2):</label> 
-<input type="radio" class="dopingtype" name="type2" value="n" checked="true">n 
-<input type="radio" class="dopingtype" name="type2" value="p">p <br />
+
+<label class="control-label">Doping type (2):</label>
+<div class="btn-group" data-toggle="buttons">
+<label class="btn btn-primary btn-sm active"><input type="radio" class="dopingtype" name="type2" value="n" checked="true">n </label>
+<label class="btn btn-primary btn-sm"><input type="radio" class="dopingtype" name="type2" value="p">p</label>
+</div>
+
+<div class="form-group">
 <label for="conc2">Doping concentration (2): </label>
-<input id="conc2" class="conctext form-control" type="text" value="1E18"> <br />
-</form>
+<input id="conc2" class="conctext form-control" type="text" value="1E18">
+</div>
 
-<form class="form-group" id="bdstyle">
+<label class="control-label">Curvature: </label>
+<div class="btn-group" data-toggle="buttons">
+<label class="btn btn-primary btn-sm active"><input type="radio" name="curvature" value="real" checked="true">Realistic </label>
+<label class="btn btn-primary btn-sm"><input type="radio" name="curvature" value="simp">Simplified</label>
+</div>
+
+</form>
+<form id="bdstyle">
 <div id="selectenergy" class="energyeditor">
 <label for="selectedline">Energy level: </label>
 <select id="selectedline" class="form-control">
@@ -59,20 +78,22 @@
 	<option value="junction">Junc</option>
 </select></div>
 <div class="energyeditor">
-<label for="lineactive">Drawn: </label>
-<input type="checkbox" id="lineactive" class="form-control" checked><br/>
+<div class="btn-group" data-toggle="buttons">
+<label for="lineactive">Drawn:
+<input type="checkbox" id="lineactive" checked></label>
+</div>
 <label for="linecolor">Line Color: </label>
 <select id="linecolor"class="form-control">
 
-</select><br />
+</select>
 <label for="linewidth">Line Width: </label>
 <select id="linewidth"class="form-control">
 
-</select><br />
+</select>
 <label for="linestyle">Line Style: </label>
 <select id="linestyle"class="form-control">
 
-</select><br/>
+</select>
 
 </div>
 </form>
