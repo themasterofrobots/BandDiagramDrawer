@@ -1,14 +1,22 @@
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
-<title>Band Diagram Drawer</title>
 
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Band Diagram Drawer</title>
 
 <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
 
 <link rel="stylesheet" type="text/css" href="style.css">
 <script src="xmlutil.js"></script>
@@ -29,16 +37,31 @@
 	<line id="x1" x1="250" x2="250" y1="0" y2="600" stroke="Black" stroke-width="2.0" fill="none" stroke-dasharray-helper="2,3" stroke-dasharray="8,12"></line>
 	<line id="x2" x1="450" x2="450" y1="0" y2="600" stroke="Black" stroke-width="2.0" fill="none" stroke-dasharray-helper="2,3" stroke-dasharray="8,12"></line>
 	<line id="junction" x1="350" x2="350" y1="0" y2="600" stroke="Black" stroke-width="2.0" fill="none" stroke-dasharray-helper="2,3" stroke-dasharray="6,9"></line>
+	<text x="100" y="50" class="h3">Side 1</text>
+	<text x="500" y="50" class="h3">Side 2</text>
 </svg>
 </main>
 
 <aside class="col-lg-4">
+<h2>Parameters</h2>
+<ul class="nav nav-tabs">
+<li><a data-toggle="tab" href="#global">Global</a></li>
+<li class="active"><a data-toggle="tab" href="#layer">Layer</a></li>
+<li><a data-toggle="tab" href="#drawing">Drawing</a></li>
+<li><a data-toggle="tab" href="#material">Material</a></li>
+</ul>
+
+<div id="global">
+
+
+</div>
+
 <form id="controls">
 
 <label class="control-label">Doping type (1): </label>
 <div class="btn-group" data-toggle="buttons">
-<label class="btn btn-primary btn-sm"><input type="radio" class="dopingtype" name="type1" autocomplete="off" value="n"> n </label>
-<label class="btn btn-primary btn-sm active"><input type="radio" class="dopingtype" name="type1" autocomplete="off" value="p" checked="true">p </label>
+<label class="btn btn-primary btn-sm"><input type="radio" class="dopingtype" name="type1" value="n"> n </label>
+<label class="btn btn-primary btn-sm active"><input type="radio" class="dopingtype" name="type1" value="p" checked="true">p </label>
 </div>
 
 <div class="form-group">
@@ -58,10 +81,10 @@
 <input id="conc2" class="conctext form-control" type="text" value="1E18">
 </div>
 
-<label class="control-label">Curvature: </label>
+<label class="control-label">Depletion Width Ratio:</label>
 <div class="btn-group" data-toggle="buttons">
-<label class="btn btn-primary btn-sm active"><input type="radio" name="curvature" value="real" checked="true">Realistic </label>
-<label class="btn btn-primary btn-sm"><input type="radio" name="curvature" value="simp">Simplified</label>
+<label class="btn btn-primary btn-sm active"><input type="radio" class="curvature" name="curvature" value="real" checked="true">Realistic </label>
+<label class="btn btn-primary btn-sm"><input type="radio" class="curvature" name="curvature" value="even">Even</label>
 </div>
 
 </form>
@@ -78,9 +101,10 @@
 	<option value="junction">Junc</option>
 </select></div>
 <div class="energyeditor">
-<div class="btn-group" data-toggle="buttons">
-<label for="lineactive">Drawn:
-<input type="checkbox" id="lineactive" checked></label>
+<div class="form-group checkbox">
+<label>
+<input type="checkbox" id="lineactive" checked>Drawn?
+</label>
 </div>
 <label for="linecolor">Line Color: </label>
 <select id="linecolor"class="form-control">

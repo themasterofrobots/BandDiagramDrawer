@@ -59,7 +59,7 @@ function updateBD()
 		n1 = material.ni*material.ni/n1;
 	if(n2 < material.ni)
 		n2 = material.ni*material.ni/n2;
-	var sidefactor = n1/(n1+n2);
+	var sidefactor = $("input[name=curvature]:checked").val() === "real" ? n1/(n1+n2) : 0.5;
 	var x1 = 200*(1-sidefactor);
 	var x2 = 200*sidefactor;
 	var V1 = Vbi*(1-sidefactor)*eVtopx;
@@ -146,6 +146,7 @@ $.fn.toggleAttr = function(attribute, value){
 function bindEvtHandlers(){
 	$(".dopingtype").change(updateBD);
 	$(".conctext").keyup(updateBD);
+	$(".curvature").change(updateBD);
 	$("#selectedline").change(updateStyleControls);
 	$("#lineactive").click(changeLineDrawn);
 	$("#linecolor").change(changeLineColor);
