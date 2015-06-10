@@ -95,8 +95,6 @@ function getSelectedLine(){
 function updateStyleControls(){
 	var $line = getSelectedLine();
 	$("#lineactive").prop("checked", ($line.attr("visibility") !== "hidden"));
-	console.log($line.attr("stroke"));
-	console.log($line.attr("stroke-width"));
 	$("#linecolor").val($line.attr("stroke"));
 	$("#linewidth").val($line.attr("stroke-width"));
 	$("#linestyle").val($line.attr("stroke-dasharray-helper"));

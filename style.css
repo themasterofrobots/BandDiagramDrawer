@@ -18,19 +18,14 @@ aside {
 	background-color:#FFF;
 }
 
-#bdstyle {
-	border:2px;
-	border-style:solid;
-	border-color:black;
-}
-
 #selectenergy {
 	border-bottom: 2px;
 	border-bottom-style: solid;
 	border-bottom-color: black;
-
+	padding-bottom: 10px;
 }
 
-.energyeditor {
-	padding:5px;
+.tab-pane {
+	padding-top: 10px;
+	/*padding-bottom: 10px;*/
 }
