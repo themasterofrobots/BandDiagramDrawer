@@ -14,8 +14,8 @@
 			this.model = bdmodel;
 			this.eVtopx = 200;
 			//fixed for now
-			this.pxheight = 600;
-			this.pxwidthy = 800;
+			this.pxheight = 400;
+			this.pxwidth = 1168;
 			this.drawingBuffer = 20;
 			this.junctionwidths = 80;
 			//Note, we must have materialwidths must be greater than two junctionwidths
@@ -41,7 +41,7 @@
 			var max = -Infinity;
 			$.each(energies, function(index, value){
 				min = Math.min(min, value.ec, value.ei, value.ev, value.ef);
-				max = Math.max(min, value.ec, value.ei, value.ev, value.ef); 
+				max = Math.max(max, value.ec, value.ei, value.ev, value.ef); 
 			});
 			var diff = max - min;
 			this.eVtopx = (this.pxheight-2*this.drawingBuffer)/diff;
