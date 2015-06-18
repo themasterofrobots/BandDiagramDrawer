@@ -4,13 +4,11 @@ body {
 
 main {
 	float:left;
-	width:700px;
 	background-color:#FFF;
 }
 
 aside {
 	float:left;
-	width:220px;
 	border:2px;
 	border-style:solid;
 	border-color:black;

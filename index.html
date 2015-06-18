@@ -2,174 +2,171 @@
 <html lang="en-US">
 <head>
 
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Band Diagram Drawer</title>
+	<title>Band Diagram Drawer</title>
 
-<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+	<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 
 <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
+      <![endif]-->
 
-<link rel="stylesheet" type="text/css" href="style.css">
-<script src="BDModel.js"></script>
-<script src="BDDrawer.js"></script>
-<script src="download.js"></script>
-<script src="canvas.js"></script>
-<script src="initialize.js"></script>
+      <link rel="stylesheet" type="text/css" href="style.css">
+      <script src="BDModel.js"></script>
+      <script src="BDDrawer.js"></script>
+      <script src="download.js"></script>
+      <script src="canvas.js"></script>
+      <script src="initialize.js"></script>
 
-</head>
-<div class="container">
-<div class="row">
-<main class="col-lg-8">
-<!-- Careful, styling in here must exactly match that of bdlines.xml -->
-<svg xmlns="http://www.w3.org/2000/svg" id="banddiagram" width="700" height="600">
- 	<path id="Ec" stroke="Blue" stroke-width="4.0" fill="none" stroke-dasharray-helper="0"></path>
-	<path id="Ei" stroke="Blue" stroke-width="4.0" fill="none" stroke-dasharray-helper="1" stroke-dasharray="4"></path>
-	<path id="Ev" stroke="Blue" stroke-width="4.0" fill="none" stroke-dasharray-helper="0"></path>
-	<line id="Ef" x1="50" x2="650" y1="300" y2="300" stroke="Green" stroke-width="3.0" fill="none" stroke-dasharray-helper="4,2" stroke-dasharray="16,8"></line>
-	<line id="x1" x1="250" x2="250" y1="0" y2="600" stroke="Black" stroke-width="2.0" fill="none" stroke-dasharray-helper="2,3" stroke-dasharray="8,12"></line>
-	<line id="x2" x1="450" x2="450" y1="0" y2="600" stroke="Black" stroke-width="2.0" fill="none" stroke-dasharray-helper="2,3" stroke-dasharray="8,12"></line>
-	<line id="junction" x1="350" x2="350" y1="0" y2="600" stroke="Black" stroke-width="2.0" fill="none" stroke-dasharray-helper="2,3" stroke-dasharray="6,9"></line>
-	<text x="100" y="50" class="h3">Side 1</text>
-	<text x="500" y="50" class="h3">Side 2</text>
-</svg>
-</main>
+  </head>
+  <div class="container">
+  	<main class="row">
+		<!-- Careful, styling in here must exactly match that of bdlines.xml -->
+		<svg xmlns="http://www.w3.org/2000/svg" id="banddiagram" width="1168 " height="400">
+			<path id="Ec" stroke="Blue" stroke-width="4.0" fill="none" stroke-dasharray-helper="0"></path>
+			<path id="Ei" stroke="Blue" stroke-width="4.0" fill="none" stroke-dasharray-helper="1" stroke-dasharray="4"></path>
+			<path id="Ev" stroke="Blue" stroke-width="4.0" fill="none" stroke-dasharray-helper="0"></path>
+			<path id="Ef" stroke="Green" stroke-width="3.0" fill="none" stroke-dasharray-helper="4,2"></line>
+			<line id="x1" x1="250" x2="250" y1="0" y2="600" stroke="Black" stroke-width="2.0" fill="none" stroke-dasharray-helper="2,3" stroke-dasharray="8,12"></line>
+			<line id="x2" x1="450" x2="450" y1="0" y2="600" stroke="Black" stroke-width="2.0" fill="none" stroke-dasharray-helper="2,3" stroke-dasharray="8,12"></line>
+			<line id="junction" x1="350" x2="350" y1="0" y2="600" stroke="Black" stroke-width="2.0" fill="none" stroke-dasharray-helper="2,3" stroke-dasharray="6,9"></line>
+			<text x="100" y="50" class="h3">Side 1</text>
+			<text x="500" y="50" class="h3">Side 2</text>
+		</svg>
+	</main>
 
-<aside class="col-lg-4">
-<h2>Parameters</h2>
-<ul class="nav nav-tabs">
-	<li><a data-toggle="tab" href="#global">Global</a></li>
-	<li class="active"><a data-toggle="tab" href="#layer">Layer</a></li>
-	<li><a data-toggle="tab" href="#drawing">Drawing</a></li>
-	<li><a data-toggle="tab" href="#material">Material</a></li>
-</ul>
+	<aside class="row"> 
+		<h2>Parameters</h2>
+		<ul class="nav nav-tabs">
+			<li><a data-toggle="tab" href="#global">Global</a></li>
+			<li class="active"><a data-toggle="tab" href="#layer">Layer</a></li>
+			<li><a data-toggle="tab" href="#drawing">Drawing</a></li>
+			<li><a data-toggle="tab" href="#material">Material</a></li>
+		</ul>
 
-<div class="tab-content">
-<div class="tab-pane" id="global">
-<form>
+		<div class="tab-content">
+			<div class="tab-pane" id="global">
+				<form>
+					<div class="form-group">
+						<label for="temperature">Temperature</label>
+						<div class="input-group">
+							<input id="temperature" class="form-control" type="text" value="300">
+							<div class="input-group-addon">&deg;K</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label">Depletion Width Ratio:</label>
+						<div class="btn-group" data-toggle="buttons">
+							<label class="btn btn-primary btn-sm active"><input type="radio" class="curvature" name="curvature" value="real" checked>Realistic </label>
+							<label class="btn btn-primary btn-sm"><input type="radio" class="curvature" name="curvature" value="even">Even</label>
+						</div>
+					</div>
 
-	<div class="form-group">
-	<label for="temperature">Temperature</label>
-	<div class="input-group">
-	<input id="temperature" class="form-control" type="text" value="300">
-	<div class="input-group-addon">&deg;K</div>
+					<div class="form-group">
+						<button type="button" id="downloadPNG" class="btn btn-default">Download PNG</button>
+					</div>
+
+				</form>
+			</div>
+
+			<div class="tab-pane active" id="layer">
+				<form>
+
+					<div class="form-group">
+						<select id="layerselect" class="form-control">
+							<option value="Side1">Side 1</option>
+							<option value="Side2">Side 2</option>
+						</select>
+					</div>
+
+					<div class="form-group">
+						<button type="button" id="newlayer" class="btn btn-primary">New Layer</button>
+						<button type="button" id="dellayer" class="btn btn-primary">Delete Layer</button>
+					</div>	
+
+					<div class="form-group">
+						<label for="layername">Layer Name</label>
+						<input id="layername" class="form-control" type="text" value="Side 1">
+					</div>
+
+					<label class="control-label">Doping type: </label>
+					<div class="btn-group" data-toggle="buttons">
+						<label class="btn btn-primary btn-sm"><input type="radio" class="dopingtype" name="dopingtype" value="n"> n </label>
+						<label class="btn btn-primary btn-sm active"><input type="radio" class="dopingtype" name="dopingtype" value="p" checked>p </label>
+					</div>
+
+					<div class="form-group">
+						<label for="conc"> Doping concentration:</label>
+						<div class="input-group">
+							<input id="conc" class="form-control" type="text" value="2E17">
+							<div class="input-group-addon">cm<sup>-3</sup></div>
+						</div>
+					</div>
+
+				</form>
+			</div>
+			<div class="tab-pane" id="drawing">
+				<form>
+
+					<div id="selectenergy" class="energyeditor">
+						<label for="selectedline">Energy level: </label>
+						<select id="selectedline" class="form-control">
+							<option value="Ec" selected="selected">Ec</option>	
+							<option value="Ei">Ei</option>
+							<option value="Ev">Ev</option>
+							<option value="Ef">Ef</option>
+							<option value="x1">x1</option>
+							<option value="x2">x2</option>
+							<option value="junction">Junc</option>
+						</select></div>
+						<div class="energyeditor">
+							<div class="form-group checkbox">
+								<label>
+									<input type="checkbox" id="lineactive" checked>Drawn?
+								</label>
+							</div>
+							<div class="form-group">
+								<label for="linecolor">Line Color: </label>
+								<select id="linecolor" class="form-control">
+
+								</select>
+							</div>
+							<div class="form-group">
+								<label for="linewidth">Line Width: </label>
+								<select id="linewidth" class="form-control">
+
+								</select>
+							</div>
+							<div class="form-group">
+								<label for="linestyle">Line Style: </label>
+								<select id="linestyle" class="form-control">
+
+								</select>
+							</div>
+						</div>
+
+					</form>
+
+				</div>
+				<div class="tab-pane" id="material">
+
+					<div class="form-group">
+						Materials (under construction)
+					</div>
+
+				</div>
+			</div>
+		</aside>
 	</div>
-	</div>
-	<div class="form-group">
-	<label class="control-label">Depletion Width Ratio:</label>
-	<div class="btn-group" data-toggle="buttons">
-	<label class="btn btn-primary btn-sm active"><input type="radio" class="curvature" name="curvature" value="real" checked="true">Realistic </label>
-	<label class="btn btn-primary btn-sm"><input type="radio" class="curvature" name="curvature" value="even">Even</label>
-	</div>
-	</div>
-
-	<div class="form-group">
-	<button type="button" id="downloadPNG" class="btn btn-default">Download PNG</button>
-	</div>
-
-</form>
-</div>
-
-<div class="tab-pane active" id="layer">
-<form>
-
-	<div class="form-group">
-	<select id="layerselect" class="form-control">
-	<option value="Side1">Side 1</option>
-	<option value="Side2">Side 2</option>
-	</select>
-	</div>
-
-	<div class="form-group">
-	<button type="button" id="newlayer" class="btn btn-primary">New Layer</button>
-	<button type="button" id="dellayer" class="btn btn-primary">Delete Layer</button>
-	</div>	
-
-	<div class="form-group">
-	<label for="layername">Layer Name</label>
-	<input id="layername" class="form-control" type="text" value="Side 1">
-	</div>
-
-	<label class="control-label">Doping type: </label>
-	<div class="btn-group" data-toggle="buttons">
-	<label class="btn btn-primary btn-sm"><input type="radio" class="dopingtype" name="dopingtype" value="n"> n </label>
-	<label class="btn btn-primary btn-sm active"><input type="radio" class="dopingtype" name="dopingtype" value="p" checked="true">p </label>
-	</div>
-
-	<div class="form-group">
-	<label for="conc"> Doping concentration:</label>
-	<div class="input-group">
-	<input id="conc" class="form-control" type="text" value="2E17">
-	<div class="input-group-addon">cm<sup>-3</sup></div>
-	</div>
-	</div>
-
-</form>
-</div>
-<div class="tab-pane" id="drawing">
-<form>
-
-	<div id="selectenergy" class="energyeditor">
-	<label for="selectedline">Energy level: </label>
-	<select id="selectedline" class="form-control">
-		<option value="Ec" selected="selected">Ec</option>	
-		<option value="Ei">Ei</option>
-		<option value="Ev">Ev</option>
-		<option value="Ef">Ef</option>
-		<option value="x1">x1</option>
-		<option value="x2">x2</option>
-		<option value="junction">Junc</option>
-	</select></div>
-	<div class="energyeditor">
-	<div class="form-group checkbox">
-	<label>
-	<input type="checkbox" id="lineactive" checked>Drawn?
-	</label>
-	</div>
-	<div class="form-group">
-	<label for="linecolor">Line Color: </label>
-	<select id="linecolor" class="form-control">
-
-	</select>
-	</div>
-	<div class="form-group">
-	<label for="linewidth">Line Width: </label>
-	<select id="linewidth" class="form-control">
-
-	</select>
-	</div>
-	<div class="form-group">
-	<label for="linestyle">Line Style: </label>
-	<select id="linestyle" class="form-control">
-
-	</select>
-	</div>
-	</div>
-
-</form>
-
-</div>
-<div class="tab-pane" id="material">
-
-	<div class="form-group">
-	Materials (under construction)
-	</div>
-
-</div>
-</div>
-
-</aside>
-
-<canvas id="canvas" width="800" height="600" href="hello.png">
-</canvas>
+	<canvas id="canvas" width="800" height="600" href="hello.png">
+	</canvas>
 
 </body>
 </html>

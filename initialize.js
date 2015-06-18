@@ -21,4 +21,5 @@ function parseBDLines(){
 
 $(document).ready(function(){
 	parseBDLines();
+	var model = new BDModel();
 });
