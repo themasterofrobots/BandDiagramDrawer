@@ -20,8 +20,26 @@
 			this.junctionwidths = 80;
 			//Note, we must have materialwidths must be greater than two junctionwidths
 			this.materialwidths = 180;
+			
+			this.realisticCurvature = true;
 
 			this.updateBD = __bind(this.updateBD, this);
+			this.toggleCurvature = __bind(this.toggleCurvature, this);
+			this.addLayer = __bind(this.addLayer, this);
+			this.remLayer = __bind(this.remLayer, this);
+			this.changeLayerName = __bind(this.changeLayerName, this);
+			this.updateLayerControls = __bind(this.updateLayerControls, this);
+		}
+
+		BDDrawer.prototype.updateLayerControls = function(layer){
+			$("#layername").val(layer.name);
+			$("#conc").val(layer.dopingLevel);
+			$(".dopingtype [value=n]").prop("checked", layer.dopingnType);
+			$(".dopingtype [value=p]").prop("checked", !layer.dopingnType);
+		}
+		
+		BDDrawer.prototype.toggleCurvature = function(){
+			this.realisticCurvature = !this.realisticCurvature;
 		}
 
 		BDDrawer.prototype.drawRegion = function(Vleft, Vright, sidefactor, linear, x1, x2, string){
@@ -57,7 +75,7 @@
 			for(i = 0; i < energies.length - 1; i++)
 			{
 				var sidefactor = 0.5;
-				if($("input[name=curvature]:checked").val() === "real")
+				if(this.realisticCurvature)
 				{
 					var d1 = energies[i].dopingLevel;
 					var d2 = energies[i+1].dopingLevel; 
@@ -75,7 +93,7 @@
 				efPath = this.drawRegion(energies[i].ef, energies[i+1].ef, sidefactor, linear, x1, x2, efPath);
 			}
 
-			var linear = " h" + (this.materialwidths+widthOfPrev);
+			var linear = " h" + (this.materialwidths/2+widthOfPrev);
 			ecPath += linear;
 			eiPath += linear;
 			evPath += linear;
@@ -87,6 +105,18 @@
 			$("#Ef").attr("d", efPath);
 			//$("#junction").attr({x1: 250+x1, x2: 250+x1});
 
+		}
+		
+		BDDrawer.prototype.addLayer = function(number, name){
+			$("#layerselect").append("<option value=\"" + number + "\">" + name + "</option>");
+		}
+		
+		BDDrawer.prototype.remLayer = function(){
+			$("#layerselect option:selected").remove();
+		}
+		
+		BDDrawer.prototype.changeLayerName = function(name){
+			$("#layerselect option:selected").text(name);
 		}
 
 		return BDDrawer;

@@ -5,7 +5,7 @@ $(document).ready(function(){
 	parseXML("Si.xml", material);
 	parseBDLines();
 });
-
+ 
 function updateDoping(origdopingvar, textid, radioname)
 {
 	var temp = parseFloat($(textid).val());
