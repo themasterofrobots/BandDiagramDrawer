@@ -4,6 +4,26 @@
 		"selected_items":
 		[
 			[
+				"upda",
+				"updateDrawing"
+			],
+			[
+				"chan",
+				"changePotential"
+			],
+			[
+				"doping",
+				"dopingLevel"
+			],
+			[
+				"pro",
+				"prototype"
+			],
+			[
+				"get",
+				"getSelectedLayer"
+			],
+			[
 				"ei",
 				"ei"
 			],
@@ -28,16 +48,8 @@
 				"stroke-dasharray-helper"
 			],
 			[
-				"get",
-				"getSelectedLine"
-			],
-			[
 				"stroke-da",
 				"stroke-dasharray-helper"
-			],
-			[
-				"chan",
-				"changeLineColor"
 			],
 			[
 				"border-bo",
@@ -502,18 +514,6 @@
 			[
 				"list",
 				"list_cities"
-			],
-			[
-				"e",
-				"e"
-			],
-			[
-				"d",
-				"d"
-			],
-			[
-				"load",
-				"load_from_json"
 			]
 		]
 	},
@@ -523,7 +523,7 @@
 			"file": "index.html",
 			"settings":
 			{
-				"buffer_size": 6651,
+				"buffer_size": 6950,
 				"line_ending": "Unix"
 			}
 		},
@@ -544,10 +544,7 @@
 			}
 		},
 		{
-			"contents": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<configoptions>\n	<colors>\n		<Black/>\n		<Blue/>\n		<BlueViolet/>\n		<Coral/>\n		<Cornflowerblue/>\n		<Crimson/>\n		<Cyan/>\n		<DarkBlue/>\n		<DarkCyan/>\n		<DarkGreen/>\n		<DarkMagenta/>\n		<DarkOrange/>\n		<DeepSkyBlue/>\n		<DodgerBlue/>\n		<FireBrick/>\n		<Gold/>\n		<Green/>\n		<Grey/>\n		<Indigo/>\n		<Lime/>\n		<LimeGreen/>\n		<Magenta/>\n		<Navy/>\n		<OliveDrab/>\n		<Orange/>\n		<OrangeRed/>\n		<Orchid/>\n		<PaleVioletRed/>\n		<Peru/>\n		<Purple/>\n		<RebeccaPurple/>\n		<Red/> \n		<RoyalBlue/>\n		<SaddleBrown/>\n		<SeaGreen/>\n		<Silver/>\n		<SkyBlue/>\n		<SlateBlue/>\n		<SlateGray/>\n		<Teal/>\n		<Violet/>\n	</colors>\n	<widths>\n		<!-- leading letter to keep xml happy -->\n		<w0.5/>\n		<w1.0/>\n		<w1.5/>\n		<w2.0/>\n		<w2.5/>\n		<w3.0/>\n		<w4.0/>\n		<w5.0/>\n		<w6.0/>\n		<w8.0/>\n		<w10.0/>\n		<w12.0/>\n		<w16.0/>\n		<w20.0/>\n	</widths>\n	<styles>\n		<!-- we replace underscores with spaces in the display -->\n		<Solid>0</Solid>\n		<Dot1>1</Dot1>\n		<Dot2>1,2</Dot2>\n		<Short_dash1>2,1</Short_dash1>\n		<Short_dash2>2,3</Short_dash2>\n		<Medium_dash>4,2</Medium_dash>\n		<Long_dash>8,3</Long_dash>\n		<Dot-dash>8,2,1,2</Dot-dash>\n		<Dot-dot-dash>4,1,1,1,1,1</Dot-dot-dash>\n	</styles>\n</configoptions>",
 			"file": "bdlines.xml",
-			"file_size": 1266,
-			"file_write_time": 130778308620000000,
 			"settings":
 			{
 				"buffer_size": 1193,
@@ -558,7 +555,7 @@
 			"file": "BDDrawer.js",
 			"settings":
 			{
-				"buffer_size": 3861,
+				"buffer_size": 4160,
 				"line_ending": "Windows"
 			}
 		},
@@ -566,7 +563,7 @@
 			"file": "BDModel.js",
 			"settings":
 			{
-				"buffer_size": 4608,
+				"buffer_size": 5246,
 				"line_ending": "Unix"
 			}
 		},
@@ -574,7 +571,7 @@
 			"file": "BDController.js",
 			"settings":
 			{
-				"buffer_size": 4443,
+				"buffer_size": 6082,
 				"line_ending": "Windows"
 			}
 		},
@@ -603,10 +600,7 @@
 			}
 		},
 		{
-			"contents": "var material = {};\nvar n1 = 2E17, n2 = 1E18;\n\n$(document).ready(function(){\n	parseXML(\"Si.xml\", material);\n	parseBDLines();\n});\n \nfunction updateDoping(origdopingvar, textid, radioname)\n{\n	var temp = parseFloat($(textid).val());\n\n	if(isNaN(temp))\n	{\n		return origdopingvar;\n	}\n\n	temp += material.ni;\n\n	if($(\"input[name=\" + radioname + \"]:checked\").val() === \"p\")\n		temp = material.ni*material.ni/temp;\n\n	return temp;\n}\n\nfunction calcEnergy(doping, nc) {\n	var boltzman = 8.61733E-5;\n	var temp = 300;\n	//this returns the magnitude, sign is positive\n	return boltzman*temp*Math.log(nc/doping);\n}\n\nfunction drawPoint(x, y){\n	$(\"#banddiagram\").append($('<circle>').attr({cx: x, cy: y, r: 2, fill: \"red\", class:\"diagnostic\"}));\n}\n\nfunction drawLine(x1, y1, x2, y2){\n	$(\"#banddiagram\").append($('<line>').attr({x1: x1, y1: y1, x2: x2, y2: y2, stroke: \"red\", class:\"diagnostic\"}));\n}\n\nfunction updateBD()\n{\n	n1 = updateDoping(n1, \"#conc1\", \"type1\");\n	n2 = updateDoping(n2, \"#conc2\", \"type2\");\n\n	var Ef1 = calcEnergy(n1, material.Nc);\n	var Ef2 = calcEnergy(n2, material.Nc);\n\n	var Vbi = Ef1 - Ef2;\n\n	var eVtopx = 200;\n	var line = \" h200\";\n	var ecstart = \"M50,\" + (300-Ef1*eVtopx);\n	var eistart = \"M50,\" + (300-(Ef1-material.Eg/2)*eVtopx);\n	var evstart = \"M50,\" + (300-(Ef1-material.Eg)*eVtopx);\n\n	//change this for the side factor calculation\n	if(n1 < material.ni)\n		n1 = material.ni*material.ni/n1;\n	if(n2 < material.ni)\n		n2 = material.ni*material.ni/n2;\n	var sidefactor = $(\"input[name=curvature]:checked\").val() === \"real\" ? n1/(n1+n2) : 0.5;\n	var x1 = 200*(1-sidefactor);\n	var x2 = 200*sidefactor;\n	var V1 = Vbi*(1-sidefactor)*eVtopx;\n	var V2 = Vbi*sidefactor*eVtopx;\n	var poshelper = Math.min(x1, x2);\n	var contactpotential = \" q\" + (x1-(1-sidefactor)*poshelper) + \",\" + 0 + \" \" + x1 + \",\" + V1 + \" q\" + (sidefactor)*poshelper + \",\" + V2 + \" \" + x2 + \",\" + V2;\n\n	$(\"#Ec\").attr(\"d\", ecstart + line + contactpotential + line);\n	$(\"#Ei\").attr(\"d\", eistart + line + contactpotential + line);\n	$(\"#Ev\").attr(\"d\", evstart + line + contactpotential + line);\n	$(\"#junction\").attr({x1: 250+x1, x2: 250+x1});\n\n	$(\".diagnostic\").remove();\n\n	drawPoint(250,300-Ef1*eVtopx);\n	drawPoint(250+x1-(1-sidefactor)*poshelper,300-Ef1*eVtopx);\n	drawPoint(250+x1,300-Ef1*eVtopx+V1);\n	drawPoint(250+x1+(sidefactor)*poshelper,300-Ef1*eVtopx+V1+V2);\n	drawPoint(250+x1+x2,300-Ef1*eVtopx+V1+V2);\n\n	drawLine(250, 300-Ef1*eVtopx, 250+x1-(1-sidefactor)*poshelper, 300-Ef1*eVtopx);\n	drawLine(250+x1-(1-sidefactor)*poshelper, 300-Ef1*eVtopx, 250+x1,300-Ef1*eVtopx+V1);\n	drawLine(250+x1,300-Ef1*eVtopx+V1,250+x1+(sidefactor)*poshelper,300-Ef1*eVtopx+V1+V2);\n	drawLine(250+x1+(sidefactor)*poshelper,300-Ef1*eVtopx+V1+V2, 250+x1+x2,300-Ef1*eVtopx+V1+V2);\n\n	drawCanvas();\n}\n\nfunction getSelectedLine(){\n	return $(\"#\" + $(\"#selectedline option:selected\").val());\n}\n\nfunction updateStyleControls(){\n	var $line = getSelectedLine();\n	$(\"#lineactive\").prop(\"checked\", ($line.attr(\"visibility\") !== \"hidden\"));\n	$(\"#linecolor\").val($line.attr(\"stroke\"));\n	$(\"#linewidth\").val($line.attr(\"stroke-width\"));\n	$(\"#linestyle\").val($line.attr(\"stroke-dasharray-helper\"));\n}\n\nfunction changeLineDrawn(){\n	getSelectedLine().toggleAttr(\"visibility\", \"hidden\");\n}\n\nfunction changeLineColor(){\n	getSelectedLine().attr(\"stroke\", $(\"#linecolor option:selected\").val());\n}\n\nfunction changeLineWidth(){\n	getSelectedLine().attr(\"stroke-width\", $(\"#linewidth option:selected\").val());\n	lineStyleHelper(getSelectedLine());\n}\n\nfunction changeLineStyle(){\n	getSelectedLine().attr(\"stroke-dasharray-helper\", $(\"#linestyle option:selected\").attr(\"value\"));\n	lineStyleHelper(getSelectedLine());\n}\n\nfunction lineStyleHelper($line){\n	var thickness = parseFloat($line.attr(\"stroke-width\"));\n	if(thickness < 3.5) thickness += 1.0;\n	var dasharray = $line.attr(\"stroke-dasharray-helper\").split(\",\");\n	$.each(dasharray, function(index, value){\n		dasharray[index] = thickness*parseFloat(value);\n		if(dasharray[index] === 0.0) \n			dasharray[index] = \"none\";\n	});\n	$line.attr(\"stroke-dasharray\", dasharray.join());\n}\n\n$.fn.toggleAttr = function(attribute, value){\n	if ($(this).attr(attribute) === value)\n	{\n		$(this).removeAttr(attribute);\n	}\n	else\n	{\n		$(this).attr(attribute, value);\n	}\n}\n\nfunction bindEvtHandlers(){\n	$(\".dopingtype\").change(updateBD);\n	$(\".conctext\").keyup(updateBD);\n	$(\".curvature\").change(updateBD);\n	$(\"#selectedline\").change(updateStyleControls);\n	$(\"#lineactive\").click(changeLineDrawn);\n	$(\"#linecolor\").change(changeLineColor);\n	$(\"#linewidth\").change(changeLineWidth);\n	$(\"#linestyle\").change(changeLineStyle);\n	$(\"#downloadPNG\").click(downloadCanvas);\n	updateStyleControls();\n	updateBD();\n}",
 			"file": "firstattempt/drawing.js",
-			"file_size": 4639,
-			"file_write_time": 130784180240000000,
 			"settings":
 			{
 				"buffer_size": 4640,
@@ -658,6 +652,7 @@
 	],
 	"file_history":
 	[
+		"/C/Users/mw172/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
 		"/C/Users/mw172/Downloads/hw-5.tex",
 		"/C/Users/mw172/Downloads/pop_song.py",
 		"/C/Users/mw172/Dropbox/Documents symlink/MSE204/GroupAssignment2.m",
@@ -784,12 +779,11 @@
 		"/C/Users/mw172_000/Dropbox/Documents symlink/CS492/javaplayland/web/scripts/ace/src-noconflict/ace.js",
 		"/C/Users/mw172_000/Dropbox/Documents symlink/MSE395/MaterialsDiscovery/bandOffsetCalc.py",
 		"/C/Users/mw172_000/Dropbox/Documents symlink/MSE395/MaterialsDiscovery/GrabSingleCompound",
-		"/C/Users/mw172_000/Dropbox/Documents symlink/MSE395/demo.py",
-		"/C/Users/mw172_000/Dropbox/Documents symlink/MSE395/MaterialsDiscovery/FirstAttempt.py"
+		"/C/Users/mw172_000/Dropbox/Documents symlink/MSE395/demo.py"
 	],
 	"find":
 	{
-		"height": 27.0
+		"height": 41.0
 	},
 	"find_in_files":
 	{
@@ -808,6 +802,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"update",
 			"pxwidth",
 			"stroke-dasharray-helper",
 			" stroke-dasharray-helper",
@@ -934,8 +929,7 @@
 			"unhighlight",
 			"highlight",
 			"currentGame",
-			"canPlay",
-			"top property"
+			"canPlay"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -943,6 +937,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"updateDrawing",
 			"V2",
 			"V1",
 			"x2",
@@ -984,15 +979,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 6651,
+						"buffer_size": 6950,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								353,
-								353
+								1132,
+								1132
 							]
 						],
 						"settings":
@@ -1001,10 +996,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 570.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
@@ -1032,7 +1027,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 8,
 					"type": "text"
 				},
 				{
@@ -1061,7 +1056,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 7,
+					"stack_index": 6,
 					"type": "text"
 				},
 				{
@@ -1090,7 +1085,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
@@ -1099,15 +1094,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3861,
+						"buffer_size": 4160,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								970,
-								970
+								305,
+								305
 							]
 						],
 						"settings":
@@ -1120,7 +1115,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
@@ -1129,15 +1124,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4608,
+						"buffer_size": 5246,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								279,
-								248
+								408,
+								408
 							]
 						],
 						"settings":
@@ -1149,7 +1144,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
@@ -1158,15 +1153,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4443,
+						"buffer_size": 6082,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								999,
-								999
+								2953,
+								2953
 							]
 						],
 						"settings":
@@ -1175,7 +1170,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 171.0,
+						"translation.y": 1046.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -1207,7 +1202,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 8,
+					"stack_index": 5,
 					"type": "text"
 				}
 			]
@@ -1298,10 +1293,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 114.0,
+						"translation.y": 303.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 7,
 					"type": "text"
 				},
 				{
@@ -1386,7 +1381,7 @@
 	"project": "banddiagramdrawer.sublime-project",
 	"replace":
 	{
-		"height": 50.0
+		"height": 76.0
 	},
 	"save_all_on_build": true,
 	"select_file":
