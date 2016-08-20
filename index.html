@@ -34,7 +34,6 @@
       <script src="canvas.js"></script>
       <script src="initialize.js"></script>
 
-
   </head>
   <body>
   	<div class="title">
@@ -45,152 +44,152 @@
   		<!-- Page Content -->
   		<div id="page-content-wrapper">
   			<div class="container-fluid">
-  				<div class="row">
-  					<a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
-  				</div>
-  						<!-- Careful, styling in here must exactly match that of bdlines.xml -->
-  						<svg xmlns="http://www.w3.org/2000/svg" id="banddiagram" width="100%" height="400">
-  							<path id="Ec" stroke="Blue" stroke-width="4.0" fill="none" stroke-dasharray-helper="0"></path>
-  							<path id="Ei" stroke="Blue" stroke-width="4.0" fill="none" stroke-dasharray-helper="1" stroke-dasharray="4"></path>
-  							<path id="Ev" stroke="Blue" stroke-width="4.0" fill="none" stroke-dasharray-helper="0"></path>
-  							<path id="Ef" stroke="Green" stroke-width="3.0" fill="none" stroke-dasharray-helper="4,2"></path>
-  							<line id="x1" x1="250" x2="250" y1="0" y2="600" stroke="Black" stroke-width="2.0" fill="none" stroke-dasharray-helper="2,3" stroke-dasharray="8,12"></line>
-  							<line id="x2" x1="350" x2="350" y1="0" y2="600" stroke="Black" stroke-width="2.0" fill="none" stroke-dasharray-helper="2,3" stroke-dasharray="8,12"></line>
-  							<line id="junction" x1="300" x2="300" y1="0" y2="600" stroke="Black" stroke-width="2.0" fill="none" stroke-dasharray-helper="2,3" stroke-dasharray="6,9"></line>
-  							<text x="100" y="50" class="h3">Side 1</text>
-  							<text x="500" y="50" class="h3">Side 2</text>
-  						</svg>
+  				<!-- Careful, styling in here must exactly match that of bdlines.xml -->
+  				<svg xmlns="http://www.w3.org/2000/svg" id="banddiagram" width="100%" height="400">
+  					<path id="Ec" stroke="Blue" stroke-width="4.0" fill="none" stroke-dasharray-helper="0"></path>
+  					<path id="Ei" stroke="Blue" stroke-width="4.0" fill="none" stroke-dasharray-helper="1" stroke-dasharray="4"></path>
+  					<path id="Ev" stroke="Blue" stroke-width="4.0" fill="none" stroke-dasharray-helper="0"></path>
+  					<path id="Ef" stroke="Green" stroke-width="3.0" fill="none" stroke-dasharray-helper="4,2"></path>
+  					<line id="x1" x1="250" x2="250" y1="0" y2="600" stroke="Black" stroke-width="2.0" fill="none" stroke-dasharray-helper="2,3" stroke-dasharray="8,12"></line>
+  					<line id="x2" x1="350" x2="350" y1="0" y2="600" stroke="Black" stroke-width="2.0" fill="none" stroke-dasharray-helper="2,3" stroke-dasharray="8,12"></line>
+  					<line id="junction" x1="300" x2="300" y1="0" y2="600" stroke="Black" stroke-width="2.0" fill="none" stroke-dasharray-helper="2,3" stroke-dasharray="6,9"></line>
+  					<text x="100" y="50" class="h3">Side 1</text>
+  					<text x="500" y="50" class="h3">Side 2</text>
+  				</svg>
   			</div>
   		</div>
   		<!-- /#page-content-wrapper -->
 
   		<!-- Sidebar -->
   		<div id="sidebar-wrapper">
-  			<h2>Parameters</h2>
-  			<ul class="nav nav-tabs">
-  				<li><a data-toggle="tab" href="#global">Global</a></li>
-  				<li class="active"><a data-toggle="tab" href="#layer">Layer</a></li>
-  				<li><a data-toggle="tab" href="#drawing">Drawing</a></li>
-  				<li><a data-toggle="tab" href="#material">Material</a></li>
-  			</ul>
+  			<a href="#menu-toggle" id="menu-toggle">&lt;</a>
+  			<div id="sidebar-main">
+  				<h2>Parameters</h2>
+  				<ul class="nav nav-tabs">
+  					<li><a data-toggle="tab" href="#global">Global</a></li>
+  					<li class="active"><a data-toggle="tab" href="#layer">Layer</a></li>
+  					<li><a data-toggle="tab" href="#drawing">Drawing</a></li>
+  					<li><a data-toggle="tab" href="#material">Material</a></li>
+  				</ul>
 
-  			<div class="tab-content">
-  				<div class="tab-pane" id="global">
-  					<form>
-  						<div class="form-group">
-  							<label for="temperature">Temperature</label>
-  							<div class="input-group has-success">
-  								<input id="temperature" class="form-control" type="text" value="300">
-  								<div class="input-group-addon">&deg;K</div>
-  							</div>
-  						</div>
-  						<div class="form-group">
-  							<label class="control-label">Depletion Width Ratio:</label>
-  							<div class="btn-group" data-toggle="buttons">
-  								<label class="btn btn-primary btn-sm active"><input type="radio" class="curvature" name="curvature" value="real" checked>Realistic </label>
-  								<label class="btn btn-primary btn-sm"><input type="radio" class="curvature" name="curvature" value="even">Even</label>
-  							</div>
-  						</div>
-
-  						<div class="form-group">
-  							<button type="button" id="downloadPNG" class="btn btn-default">Download PNG</button>
-  						</div>
-
-  					</form>
-  				</div>
-
-  				<div class="tab-pane active" id="layer">
-  					<form>
-
-  						<div class="form-group">
-  							<select id="layerselect" class="form-control">
-  							</select>
-  						</div>
-
-  						<div class="form-group">
-  							<button type="button" id="newlayer" class="btn btn-primary">New Layer</button>
-  							<button type="button" id="dellayer" class="btn btn-primary">Delete Layer</button>
-  						</div>	
-
-  						<div class="form-group">
-  							<label for="layername">Layer Name</label>
-  							<input id="layername" class="form-control" type="text" value="Side 1">
-  						</div>
-
-  						<label class="control-label">Doping type: </label>
-  						<div class="btn-group" data-toggle="buttons">
-  							<label class="btn btn-primary btn-sm"><input type="radio" class="dopingtype" name="dopingtype" value="n"> n </label>
-  							<label class="btn btn-primary btn-sm active"><input type="radio" class="dopingtype" name="dopingtype" value="p" checked>p </label>
-  						</div>
-
-  						<div class="form-group">
-  							<label for="conc"> Doping concentration:</label>
-  							<div class="input-group has-success">
-  								<input id="conc" class="form-control" type="text" value="2E17">
-  								<div class="input-group-addon">cm<sup>-3</sup></div>
-  							</div>
-  						</div>
-
-  						<div class="form-group">
-  							<label for="potential">Contact Potential:</label>
-  							<div class="input-group has-success">
-  								<input id="potential" class="form-control" type="text" value="0">
-  								<div class="input-group-addon">V</div>
-  							</div>
-  						</div>
-
-  					</form>
-  				</div>
-  				<div class="tab-pane" id="drawing">
-  					<form>
-
-  						<div id="selectenergy" class="energyeditor">
-  							<label for="selectedline">Energy level: </label>
-  							<select id="selectedline" class="form-control">
-  								<option value="Ec" selected="selected">Ec</option>	
-  								<option value="Ei">Ei</option>
-  								<option value="Ev">Ev</option>
-  								<option value="Ef">Ef</option>
-  								<option value="x1">x1</option>
-  								<option value="x2">x2</option>
-  								<option value="junction">Junc</option>
-  							</select>
-  						</div>
-  						<div class="energyeditor">
-  							<div class="form-group checkbox">
-  								<label>
-  									<input type="checkbox" id="lineactive" checked>Drawn?
-  								</label>
+  				<div class="tab-content">
+  					<div class="tab-pane" id="global">
+  						<form>
+  							<div class="form-group">
+  								<label for="temperature">Temperature</label>
+  								<div class="input-group has-success">
+  									<input id="temperature" class="form-control" type="text" value="300">
+  									<div class="input-group-addon">&deg;K</div>
+  								</div>
   							</div>
   							<div class="form-group">
-  								<label for="linecolor">Line Color: </label>
-  								<select id="linecolor" class="form-control">
-
-  								</select>
+  								<label class="control-label">Depletion Width Ratio:</label>
+  								<div class="btn-group" data-toggle="buttons">
+  									<label class="btn btn-primary btn-sm active"><input type="radio" class="curvature" name="curvature" value="real" checked>Realistic </label>
+  									<label class="btn btn-primary btn-sm"><input type="radio" class="curvature" name="curvature" value="even">Even</label>
+  								</div>
   							</div>
+
   							<div class="form-group">
-  								<label for="linewidth">Line Width: </label>
-  								<select id="linewidth" class="form-control">
-
-  								</select>
+  								<button type="button" id="downloadPNG" class="btn btn-default">Download PNG</button>
   							</div>
-  							<div class="form-group">
-  								<label for="linestyle">Line Style: </label>
-  								<select id="linestyle" class="form-control">
 
-  								</select>
-  							</div>
-  						</div>
-
-  					</form>
-
-  				</div>
-  				<div class="tab-pane" id="material">
-
-  					<div class="form-group">
-  						Materials (under construction)
+  						</form>
   					</div>
 
+  					<div class="tab-pane active" id="layer">
+  						<form>
+
+  							<div class="form-group">
+  								<select id="layerselect" class="form-control">
+  								</select>
+  							</div>
+
+  							<div class="form-group">
+  								<button type="button" id="newlayer" class="btn btn-primary">New Layer</button>
+  								<button type="button" id="dellayer" class="btn btn-primary">Delete Layer</button>
+  							</div>	
+
+  							<div class="form-group">
+  								<label for="layername">Layer Name</label>
+  								<input id="layername" class="form-control" type="text" value="Side 1">
+  							</div>
+
+  							<label class="control-label">Doping type: </label>
+  							<div class="btn-group" data-toggle="buttons">
+  								<label class="btn btn-primary btn-sm"><input type="radio" class="dopingtype" name="dopingtype" value="n"> n </label>
+  								<label class="btn btn-primary btn-sm active"><input type="radio" class="dopingtype" name="dopingtype" value="p" checked>p </label>
+  							</div>
+
+  							<div class="form-group">
+  								<label for="conc"> Doping concentration:</label>
+  								<div class="input-group has-success">
+  									<input id="conc" class="form-control" type="text" value="2E17">
+  									<div class="input-group-addon">cm<sup>-3</sup></div>
+  								</div>
+  							</div>
+
+  							<div class="form-group">
+  								<label for="potential">Contact Potential:</label>
+  								<div class="input-group has-success">
+  									<input id="potential" class="form-control" type="text" value="0">
+  									<div class="input-group-addon">V</div>
+  								</div>
+  							</div>
+
+  						</form>
+  					</div>
+  					<div class="tab-pane" id="drawing">
+  						<form>
+
+  							<div id="selectenergy" class="energyeditor">
+  								<label for="selectedline">Energy level: </label>
+  								<select id="selectedline" class="form-control">
+  									<option value="Ec" selected="selected">Ec</option>	
+  									<option value="Ei">Ei</option>
+  									<option value="Ev">Ev</option>
+  									<option value="Ef">Ef</option>
+  									<option value="x1">x1</option>
+  									<option value="x2">x2</option>
+  									<option value="junction">Junc</option>
+  								</select>
+  							</div>
+  							<div class="energyeditor">
+  								<div class="form-group checkbox">
+  									<label>
+  										<input type="checkbox" id="lineactive" checked>Drawn?
+  									</label>
+  								</div>
+  								<div class="form-group">
+  									<label for="linecolor">Line Color: </label>
+  									<select id="linecolor" class="form-control">
+
+  									</select>
+  								</div>
+  								<div class="form-group">
+  									<label for="linewidth">Line Width: </label>
+  									<select id="linewidth" class="form-control">
+
+  									</select>
+  								</div>
+  								<div class="form-group">
+  									<label for="linestyle">Line Style: </label>
+  									<select id="linestyle" class="form-control">
+
+  									</select>
+  								</div>
+  							</div>
+
+  						</form>
+
+  					</div>
+  					<div class="tab-pane" id="material">
+
+  						<div class="form-group">
+  							Materials (under construction)
+  						</div>
+
+  					</div>
   				</div>
   			</div>
   		</div>

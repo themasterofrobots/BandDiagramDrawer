@@ -146,7 +146,7 @@
 		function BDLayer(materialBase, newIndex){
 			this.name = "Side " + newIndex.toString();
 			this.mat = materialBase;
-			this.dopingLevel = 1E17;
+			this.dopingLevel = 2E17;
 			this.dopingnType = true;
 			this.contactpotential = 0.0;
 		};

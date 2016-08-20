@@ -2,10 +2,40 @@ body {
     overflow-x: hidden;
  }
 
+/*drawing animations*/
+/*path {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: dash 5s linear forwards;
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: 0;
+  }
+}*/
+
+
 /* Toggle Styles */
 
+#menu-toggle {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    height:100%;
+    width:20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    float:left;
+    vertical-align: middle;
+    position:relative;
+}
+
 #wrapper {
-    padding-right: 0;
+    padding-right: 50;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
@@ -18,13 +48,11 @@ body {
 }
 
 #sidebar-wrapper {
+    width:50px;
     z-index: 1000;
-    /*position: absolute;*/
-    right:250px;
+    right: 250px;
     height: 100%;
     margin-right: -250px;
-    margin-top:25px;
-    margin-bottom:25px;
     overflow-y: auto;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
@@ -34,6 +62,12 @@ body {
 
 #wrapper.toggled #sidebar-wrapper {
     width: 250px;
+}
+
+#sidebar-main {
+    float:left;
+    height:inherit;
+    width: 200px;
 }
 
 #page-content-wrapper {
@@ -55,7 +89,7 @@ body {
     }
 
     #wrapper.toggled {
-        padding-right: 0;
+        padding-right: 20px;
     }
 
     #sidebar-wrapper {
@@ -63,9 +97,12 @@ body {
         float: right;
     }
 
-    #wrapper.toggled #sidebar-wrapper {
-        width: 0;
+    #sidebar-main {
+        float:left;
+        height:inherit;
+        width: 200px;
     }
+
 
     #page-content-wrapper {
         padding: 20px;
@@ -74,7 +111,7 @@ body {
 
     #wrapper.toggled #page-content-wrapper {
         position: relative;
-        margin-left: 0;
+        margin-left: 0px;
     }
 }
 
@@ -94,10 +131,10 @@ body {
 	margin-bottom: 20px;
 	border:10px;
 	border-style:solid;
-	border-color:#AEE;
+	border-color:#8EE;
 	border-radius:60px 10px;
-	background-color:#AEE;
-	color:#494;
+	background-color:#8EE;
+	color:white;
 }
 
 
