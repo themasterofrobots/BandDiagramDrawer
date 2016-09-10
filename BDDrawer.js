@@ -10,6 +10,8 @@
 
 	BDDrawer = (function() {
 
+ 
+
 		function BDDrawer(bdmodel) {
 			this.model = bdmodel;
 			this.eVtopx = 200;
@@ -29,6 +31,20 @@
 			this.remLayer = __bind(this.remLayer, this);
 			this.changeLayerName = __bind(this.changeLayerName, this);
 			this.updateLayerControls = __bind(this.updateLayerControls, this);
+
+			this.toggled = false
+
+			$("#menu-toggle").click(function(e) {
+				e.preventDefault();
+				$("#wrapper").toggleClass("toggled");
+				if(this.toggled){
+					$("#menu-toggle").html("&gt;");
+				}
+				else {
+					$("#menu-toggle").html("&lt;");
+				}
+				this.toggled = !this.toggled;
+			});
 		}
 
 		BDDrawer.prototype.updateLayerControls = function(layer){

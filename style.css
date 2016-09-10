@@ -18,19 +18,23 @@ body {
 
 /* Toggle Styles */
 
+#toggle-button {
+    height:100%;
+    width:20px;
+}
+
 #menu-toggle {
     background-color: #4CAF50;
     border: none;
     color: white;
-    height:100%;
     width:20px;
-    text-align: center;
-    text-decoration: none;
+    text-align:center;
+    text-decoration:none;
     display: inline-block;
     font-size: 16px;
     cursor: pointer;
     float:left;
-    vertical-align: middle;
+    vertical-align:center;
     position:relative;
 }
 
@@ -44,15 +48,14 @@ body {
 }
 
 #wrapper.toggled {
-    padding-right: 250px;
+    padding-right: 450px;
 }
 
 #sidebar-wrapper {
-    width:50px;
-    z-index: 1000;
-    right: 250px;
+    width: 50px;
+    right: 450px;
     height: 100%;
-    margin-right: -250px;
+    margin-right: -450px;
     overflow-y: auto;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
@@ -61,13 +64,13 @@ body {
 }
 
 #wrapper.toggled #sidebar-wrapper {
-    width: 250px;
+    width: 450px;
 }
 
 #sidebar-main {
     float:left;
     height:inherit;
-    width: 200px;
+    width: 400px;
 }
 
 #page-content-wrapper {
@@ -79,13 +82,13 @@ body {
 
 #wrapper.toggled #page-content-wrapper {
     position: absolute;
-    margin-left: -250px;
+    margin-left: -450px;
 }
 
 /* Sidebar Styles */
 @media(min-width:768px) {
     #wrapper {
-        padding-right: 250px;
+        padding-right: 450px;
     }
 
     #wrapper.toggled {
@@ -93,14 +96,20 @@ body {
     }
 
     #sidebar-wrapper {
-        width: 250px;
+        width: 450px;
+
         float: right;
+
+    }
+
+    #toggle-text {
+        vertical-align: center;
     }
 
     #sidebar-main {
         float:left;
         height:inherit;
-        width: 200px;
+        width: 400px;
     }
 
 

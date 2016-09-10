@@ -45,7 +45,7 @@
   		<div id="page-content-wrapper">
   			<div class="container-fluid">
   				<!-- Careful, styling in here must exactly match that of bdlines.xml -->
-  				<svg xmlns="http://www.w3.org/2000/svg" id="banddiagram" width="100%" height="400">
+  				<svg xmlns="http://www.w3.org/2000/svg" id="banddiagram" width="1000" height="400">
   					<path id="Ec" stroke="Blue" stroke-width="4.0" fill="none" stroke-dasharray-helper="0"></path>
   					<path id="Ei" stroke="Blue" stroke-width="4.0" fill="none" stroke-dasharray-helper="1" stroke-dasharray="4"></path>
   					<path id="Ev" stroke="Blue" stroke-width="4.0" fill="none" stroke-dasharray-helper="0"></path>
@@ -62,7 +62,9 @@
 
   		<!-- Sidebar -->
   		<div id="sidebar-wrapper">
-  			<a href="#menu-toggle" id="menu-toggle">&lt;</a>
+  			<div id="toggle-button">
+  				<a href="#menu-toggle" id="menu-toggle"><div id="toggle-text">&gt;</div></a>
+  			</div>
   			<div id="sidebar-main">
   				<h2>Parameters</h2>
   				<ul class="nav nav-tabs">
@@ -202,10 +204,7 @@
   	</canvas>
 
   	<script>
-  		$("#menu-toggle").click(function(e) {
-  			e.preventDefault();
-  			$("#wrapper").toggleClass("toggled");
-  		});
+  		
   	</script>
 
   </body>
