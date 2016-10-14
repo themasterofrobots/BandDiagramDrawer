@@ -52,7 +52,7 @@
 			if ($.isNumeric(temp)){
 				parent.toggleClass("has-success", true);
 				parent.toggleClass("has-error", false);
-				this.model.updateTemperature();
+				this.model.updateTemperature(temp);
 			}
 			else {
 				parent.toggleClass("has-success", false);
