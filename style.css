@@ -2,6 +2,16 @@ body {
     overflow-x: hidden;
  }
 
+@font-face {
+    font-family:"Big John";
+    src: url("fonts/BIG JOHN.otf");
+}
+
+@font-face {
+    font-family:"Slim Joe";
+    src: url("fonts/Slim Joe.otf");
+}
+
 /*drawing animations*/
 /*path {
     stroke-dasharray: 1000;
@@ -19,23 +29,26 @@ body {
 /* Toggle Styles */
 
 #toggle-button {
-    height:100%;
+    box-sizing: border-box;
+    height:500px;
     width:20px;
+    float:left;
+    background-color: #626;
+    position: relative;
 }
 
 #menu-toggle {
-    background-color: #4CAF50;
-    border: none;
+    box-sizing: border-box;
+    width:100%;
     color: white;
-    width:20px;
     text-align:center;
     text-decoration:none;
-    display: inline-block;
     font-size: 16px;
     cursor: pointer;
-    float:left;
-    vertical-align:center;
-    position:relative;
+    position: absolute;
+    top:50%;
+    height:20px;
+    margin-top:-10px;
 }
 
 #wrapper {
@@ -45,6 +58,9 @@ body {
     -o-transition: all 0.5s ease;
     transition: all 0.5s ease;
     background: #FFF;
+    border-radius:20px;
+    margin: 0px 20px;
+    overflow-x:hidden;
 }
 
 #wrapper.toggled {
@@ -61,6 +77,7 @@ body {
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
     transition: all 0.5s ease;
+    box-sizing: border-box;
 }
 
 #wrapper.toggled #sidebar-wrapper {
@@ -71,6 +88,16 @@ body {
     float:left;
     height:inherit;
     width: 400px;
+    opacity: 1;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    margin: 0px 15px;
+}
+
+#wrapper.toggled #sidebar-main {
+    opacity: 0;
 }
 
 #page-content-wrapper {
@@ -97,13 +124,8 @@ body {
 
     #sidebar-wrapper {
         width: 450px;
-
         float: right;
 
-    }
-
-    #toggle-text {
-        vertical-align: center;
     }
 
     #sidebar-main {
@@ -140,12 +162,17 @@ body {
 	margin-bottom: 20px;
 	border:10px;
 	border-style:solid;
-	border-color:#8EE;
+	border-color:#83D;
 	border-radius:60px 10px;
-	background-color:#8EE;
+	background-color:#94A;
 	color:white;
+    font-family:"Slim Joe";
+    vertical-align: top;
 }
 
+.title h1 {
+    margin-bottom: 20px;
+}
 
 #selectenergy {
 	border-bottom: 2px;
