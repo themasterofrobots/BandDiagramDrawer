@@ -82,8 +82,11 @@
 			this.materials.splice(matIndex, 1);
 		};
 
-		BDModel.prototype.loadMaterial = function(xml)
+		BDModel.prototype.loadMaterial = function(xml, status)
 		{
+			if(status != "success"){
+				console.log("HTTP GET error")
+			}
 			var $matxml = $(xml).find("material").first();
 			var materialvar = {};
 			materialvar.matname = $matxml.find("name").text();
@@ -105,7 +108,7 @@
 		};
 
 		BDModel.prototype.parseXMLMaterial = function(filename){
-			$.get(filename, this.loadMaterial);
+			$.get(filename, this.loadMaterial, "xml");
 		};
 
 		BDModel.prototype.addLayer = function(matIndex){

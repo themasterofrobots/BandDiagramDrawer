@@ -42,7 +42,6 @@
 			$("#temperature").keyup(this.updateTemperature);
 			//$("#downloadPNG").click(downloadCanvas);
 			
-			this.updateStyleControls();
 			this.model = new BDModel(this);
 		}
 
